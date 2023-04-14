@@ -1,0 +1,156 @@
+#include <stdio.h>
+#include <sys/types.h>
+#include <unistd.h>
+
+int main() |
+{
+    fork();
+
+    printf("Hello World!\n");
+    return 0;
+}
+
+-----------------------------------------------------------------------------------
+
+#include <stdio.h>
+#include <sys/types.h>
+
+int main() |
+{
+    fork();
+    fork();
+    fork();
+
+    printf("Hello World!\n");
+    return 0;
+}
+
+-----------------------------------------------------------------------------------
+
+#include <stdio.h>
+#include <sys/types.h>
+
+void forkexample()
+{
+    if fork()==0
+        printf("Hello From Child!\n");
+    else
+        print("Hello From Parent!\n");
+}
+
+int main() |
+{
+    forkexample();
+    return 0;
+}
+
+-----------------------------------------------------------------------------------
+
+#include <stdio.h>
+#include <sys/types.h>
+
+int main() |
+{
+    int pid;
+    pid = fork();
+    if(pid==0)
+    {
+        printf("I Am The Child My Process ID Is %d\n",getpid());
+        printf("My Parents Process ID Is %d\n",getppid());
+        printf("Child Terminates\n");
+        exit(0);
+    }
+    else{
+        printf("I Am The Parent, My Process ID Is %d\n",getpid());
+        printf("My Parent's Parent  Process ID Is %d\n",getppid());
+        printf("Parent Terminates\n");
+    }
+
+    return 0;
+}
+
+-----------------------------------------------------------------------------------
+
+Zombie Process
+Orphan Process
+
+wait() system call is used for removal of 
+
+-----------------------------------------------------------------------------------
+
+#include <stdio.h>
+#include <sys/types.h>
+#include <unistd.h>
+
+int main() |
+{
+    //Fork Returns PID
+    int child_pid = fork();
+
+    //Parent Process
+    if(child_pid>0)
+    {
+        sleep(60);
+    }
+    //Child Process
+    else
+    {
+        exit(0)
+    }
+    return 0;
+}
+
+Here Parent Will Not Be Aware That The Child Process Is Completed Since It Is In Sleep
+
+-----------------------------------------------------------------------------------
+
+Process Which Is Executing And The Parent Process Is Terminated
+Concept Of Reparenting Comes Here --> The Orphans Process Are Adopted By A New Process In Linux
+Reparetning Done By Kernel
+
+New Parent Process Askes The Kernel For Cleaning Of The PCB After Completing Of Orphan Process
+
+#include <stdio.h>
+#include <sys/types.h>
+#include <unistd.h>
+
+int main() |
+{
+    //Fork Returns PID
+    int child_pid = fork();
+
+    int pid;
+    pid = fork();
+
+    if(pid==0)
+    {
+        printf("I Am The Child My Process ID Is %d\n",getpid());
+        printf("My Parents Process ID Is %d\n",getppid());
+        sleep(30);
+        printf("After Sleep\n");
+        printf("I Am The Parent, My Process ID Is %d\n",getpid());
+        printf("I Parent's Parent, My Process ID Is %d\n",getppid());
+        printf("Child Terminates\n");
+    }
+
+    else
+    {
+        sleep(0200)
+        printf("I Am The Parent, My Process ID Is %d\n",getpid());
+        printf("My Parent's Parent Process ID Is %d\n",getppid());
+        printf("Parent Terminates\n");
+    }
+    return 0;
+}
+
+-----------------------------------------------------------------------------------
+
+A Daemon Process Is A Background Process That Is Not Under The Direct Control Of The User
+
+Eg. Crond -- A Job Scheduler That Runs The Job In Background
+    Syslogd --  This Is The System Logger That Implements The Sustem Logging 
+                Facility And Collects The System Messages
+    Httpd -- This Is The Web Server Daemon Process That Handels The Hypertext Transfer
+
+
+
