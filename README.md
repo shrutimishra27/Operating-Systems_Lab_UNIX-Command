@@ -1,1 +1,5 @@
-Operating-Systems_Lab_UNIX-Command
+# Operating-Systems_Lab
+
+## UNIX-Command
+
+### Linux Distribution: Ubuntu
